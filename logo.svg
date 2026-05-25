@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Fundo -->
+  <rect width="200" height="200" fill="#3D2B50" rx="20"/>
+
+  <!-- Círculos decorativos de fundo -->
+  <circle cx="170" cy="30" r="45" fill="#7A5C8A" opacity="0.25"/>
+  <circle cx="20" cy="175" r="35" fill="#A87CC0" opacity="0.15"/>
+
+  <!-- Balão: corpo -->
+  <ellipse cx="100" cy="80" rx="34" ry="40" fill="#A87CC0"/>
+  <!-- Balão: reflexo -->
+  <ellipse cx="87" cy="62" rx="9" ry="13" fill="#EDD5F7" opacity="0.45" transform="rotate(-18 87 62)"/>
+  <!-- Balão: nó -->
+  <ellipse cx="100" cy="121" rx="4" ry="3" fill="#7A5C8A"/>
+  <!-- Balão: fitinha -->
+  <path d="M100 124 C104 134 97 142 100 152" stroke="#C9A8DC" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+
+  <!-- Linha decorativa -->
+  <rect x="58" y="164" width="84" height="1" fill="#7A5C8A" opacity="0.6"/>
+
+  <!-- Nome -->
+  <text x="100" y="155" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="28" font-weight="700" fill="#FAF7FB" letter-spacing="-0.3">Balonê</text>
+
+  <!-- Subtítulo -->
+  <text x="100" y="178" text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="7.5" fill="#A87CC0" letter-spacing="4">BRECHÓ · FÊ BASSI</text>
+</svg>
