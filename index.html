@@ -424,7 +424,7 @@
              aria-label="${p.vendida?'Vendida: ':'Selecionar: '}${p.nome}">
           <div class="card-foto">
             ${p.foto ? `<img src="${p.foto}" alt="${p.nome}" loading="lazy" />` : `<div class="card-foto-placeholder">${p.emoji||'👗'}</div>`}
-            ${p.nova&&!p.vendida ? '<span class="card-badge">Novidade</span>' : ''}
+            ${p.nova&&!p.vendida ? '<span class="card-badge">Desapego Novo</span>' : ''}
             ${p.vendida ? '<span class="card-vendida-tag">Vendida</span>' : ''}
             <div class="card-check">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
