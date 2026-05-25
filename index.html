@@ -186,6 +186,31 @@
     .footer-logo small { display: block; font-size: 9px; letter-spacing: 0.24em; color: var(--text-muted); font-family: 'Jost', sans-serif; font-weight: 300; margin-top: 2px; }
     .footer-line { width: 28px; height: 1px; background: var(--roxo-medio); margin: 12px auto; }
     footer p { font-size: 11px; color: var(--lilas-claro); line-height: 1.9; font-weight: 300; }
+
+    /* ── CARD EXTRAS ── */
+    .card-preco { font-size: 13px; font-weight: 600; color: var(--roxo); margin-bottom: 1px; }
+    .card-parcelas { font-size: 11px; color: var(--lilas); font-weight: 500; }
+    .card-medidas { font-size: 10px; color: var(--text-muted); margin-bottom: 5px; font-weight: 300; }
+
+    /* ── BOHO ── */
+    .boho-section { background: linear-gradient(160deg, #1C0F2E 0%, #2B1648 100%); padding: 32px 0 0; }
+    .boho-header { max-width: 600px; margin: 0 auto; padding: 0 20px 20px; text-align: center; }
+    .boho-titulo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #E8C97A; margin-bottom: 6px; }
+    .boho-sub { font-size: 12px; color: #B8A4C9; font-weight: 300; letter-spacing: 0.05em; }
+    .boho-divider { width: 36px; height: 1px; background: #6B4FA0; margin: 10px auto 0; }
+    .boho-section .card { background: #271540; border: 2px solid #3D2560; }
+    .boho-section .card:hover { border-color: rgba(232,201,122,0.4); }
+    .boho-section .card.selected { border-color: #E8C97A; }
+    .boho-section .card.selected .card-check { background: #E8C97A; border-color: #E8C97A; }
+    .boho-section .card-check { border-color: #6B4FA0; }
+    .boho-section .card-foto { background: #1C0F2E; }
+    .boho-section .card-badge { background: rgba(232,201,122,0.15); color: #E8C97A; }
+    .boho-section .card-codigo { color: #6B4FA0; }
+    .boho-section .card-nome { color: #E8D5FF; }
+    .boho-section .card-tam { color: #9B7DB5; }
+    .boho-section .card-preco { color: #E8C97A; }
+    .boho-section .card-parcelas { color: #C9A8DC; }
+    .boho-section .card-medidas { color: #7A5C8A; }
   </style>
 </head>
 <body>
@@ -229,6 +254,17 @@
     <div class="grid" id="js-grid"></div>
   </div>
 
+  <div class="boho-section" id="js-boho-section" style="display:none">
+    <div class="boho-header">
+      <p class="boho-titulo">🔮 Espaço Balonê Boho</p>
+      <p class="boho-sub">Artigos esotéricos com energia e intenção</p>
+      <div class="boho-divider"></div>
+    </div>
+    <div class="container">
+      <div class="grid" id="js-boho-grid"></div>
+    </div>
+  </div>
+
   <div class="carrinho-bar">
     <div class="carrinho-info">
       <strong id="bar-titulo">Nenhuma peça selecionada</strong>
@@ -270,14 +306,18 @@
       } catch (e) {
         console.warn('Notion não configurado:', e.message);
         todasPecas = [
-          { id:'BAL-001', nome:'Trench coat caramelo',     cat:'Casacos',  tam:'M',  preco:180, emoji:'🧥', nova:true,  vendida:false, foto:null },
-          { id:'BAL-002', nome:'Vestido midi listrado',    cat:'Vestidos', tam:'P',  preco:95,  emoji:'👗', nova:true,  vendida:false, foto:null },
-          { id:'BAL-003', nome:'Blazer xadrez preto',      cat:'Casacos',  tam:'G',  preco:130, emoji:'🧥', nova:false, vendida:false, foto:null },
-          { id:'BAL-004', nome:'Vestido social branco',    cat:'Vestidos', tam:'M',  preco:110, emoji:'👗', nova:true,  vendida:false, foto:null },
-          { id:'BAL-005', nome:'Calça poá preto e branco', cat:'Calças',   tam:'38', preco:75,  emoji:'👖', nova:false, vendida:true,  foto:null },
-          { id:'BAL-006', nome:'Blusa de renda off-white', cat:'Blusas',   tam:'P',  preco:55,  emoji:'👚', nova:true,  vendida:false, foto:null },
-          { id:'BAL-007', nome:'Saia midi plissada lilás', cat:'Saias',    tam:'M',  preco:85,  emoji:'✨', nova:false, vendida:false, foto:null },
-          { id:'BAL-008', nome:'Casaco tweed rosê',        cat:'Casacos',  tam:'P',  preco:160, emoji:'🧥', nova:true,  vendida:false, foto:null },
+          { id:'BAL-001', nome:'Trench coat caramelo',     cat:'Casacos',  cor:'Caramelo',      tam:'M',  medidas:'Busto 92cm · Comp. 110cm', preco:289, parcelas:3,  valorParcela:100, emoji:'🧥', nova:true,  vendida:false, foto:null },
+          { id:'BAL-002', nome:'Vestido midi listrado',    cat:'Vestidos', cor:'Azul e branco', tam:'P',  medidas:'Busto 86cm',               preco:95,  parcelas:0,  valorParcela:0,   emoji:'👗', nova:true,  vendida:false, foto:null },
+          { id:'BAL-003', nome:'Blazer xadrez preto',      cat:'Casacos',  cor:'Preto',         tam:'G',  medidas:'Busto 98cm',               preco:130, parcelas:3,  valorParcela:45,  emoji:'🧥', nova:false, vendida:false, foto:null },
+          { id:'BAL-004', nome:'Vestido social branco',    cat:'Vestidos', cor:'Off-white',     tam:'M',  medidas:'Busto 90cm',               preco:110, parcelas:0,  valorParcela:0,   emoji:'👗', nova:true,  vendida:false, foto:null },
+          { id:'BAL-005', nome:'Calça poá preto e branco', cat:'Calças',   cor:'Preto e branco',tam:'38', medidas:'Cintura 70cm',             preco:75,  parcelas:0,  valorParcela:0,   emoji:'👖', nova:false, vendida:true,  foto:null },
+          { id:'BAL-006', nome:'Blusa de renda off-white', cat:'Blusas',   cor:'Off-white',     tam:'P',  medidas:'Busto 84cm',               preco:55,  parcelas:0,  valorParcela:0,   emoji:'👚', nova:true,  vendida:false, foto:null },
+          { id:'BAL-007', nome:'Saia midi plissada lilás', cat:'Saias',    cor:'Lilás',         tam:'M',  medidas:'Cintura 68cm',             preco:85,  parcelas:0,  valorParcela:0,   emoji:'✨', nova:false, vendida:false, foto:null },
+          { id:'BAL-008', nome:'Casaco tweed rosê',        cat:'Casacos',  cor:'Rosê',          tam:'P',  medidas:'Busto 88cm',               preco:380, parcelas:10, valorParcela:39,  emoji:'🧥', nova:true,  vendida:false, foto:null },
+          { id:'BAL-009', nome:'Bolsa de couro caramelo',  cat:'Bolsas',   cor:'Caramelo',      tam:'',   medidas:'30×20×10cm',               preco:320, parcelas:10, valorParcela:33,  emoji:'👜', nova:true,  vendida:false, foto:null },
+          { id:'BAL-010', nome:'Óculos gatinho vintage',   cat:'Óculos',   cor:'Tartaruga',     tam:'',   medidas:'',                         preco:120, parcelas:3,  valorParcela:42,  emoji:'🕶️', nova:false, vendida:false, foto:null },
+          { id:'BOH-001', nome:'Cristal ametista natural', cat:'Boho',     cor:'Roxo',          tam:'',   medidas:'',                         preco:65,  parcelas:0,  valorParcela:0,   emoji:'🔮', nova:true,  vendida:false, foto:null },
+          { id:'BOH-002', nome:'Kit velas aromáticas',     cat:'Boho',     cor:'',              tam:'',   medidas:'',                         preco:45,  parcelas:0,  valorParcela:0,   emoji:'🕯️', nova:false, vendida:false, foto:null },
         ];
       }
       construirFiltros();
@@ -289,7 +329,7 @@
     }
 
     function construirFiltros() {
-      const cats = [...new Set(todasPecas.map(p => p.cat))].filter(Boolean).sort();
+      const cats = [...new Set(todasPecas.filter(p => p.cat !== 'Boho').map(p => p.cat))].filter(Boolean).sort();
       const wrap = document.getElementById('js-filtros');
       wrap.innerHTML = '<button class="ftag on" data-cat="todos">Tudo</button>'
         + cats.map(c => `<button class="ftag" data-cat="${c}">${c}</button>`).join('');
@@ -303,18 +343,13 @@
       });
     }
 
-    function renderGrid() {
-      const lista = filtroAtivo === 'todos' ? todasPecas : todasPecas.filter(p => p.cat === filtroAtivo);
-      const disp  = lista.filter(p => !p.vendida).length;
-      document.getElementById('js-contagem').textContent =
-        `${disp} peça${disp!==1?'s':''} disponível${disp!==1?'is':''}`;
-
-      if (!lista.length) {
-        document.getElementById('js-grid').innerHTML = `<div class="estado" style="grid-column:1/-1"><div class="estado-icone">🛍️</div><h3>Nenhuma peça aqui</h3><p>Tente outro filtro!</p></div>`;
-        return;
-      }
-
-      document.getElementById('js-grid').innerHTML = lista.map(p => `
+    function renderCard(p) {
+      const tamCor = [p.tam ? `Tam. ${p.tam}` : '', p.cor].filter(Boolean).join(' · ');
+      const precoHtml = !p.vendida ? `
+        <p class="card-preco">${p.parcelas ? 'Pix ' : ''}R$ ${p.preco.toFixed(2).replace('.',',')}</p>
+        ${p.parcelas && p.valorParcela ? `<p class="card-parcelas">${p.parcelas}x de R$ ${p.valorParcela.toFixed(2).replace('.',',')}</p>` : ''}
+      ` : '';
+      return `
         <div class="card${selecionadas.has(p.id)?' selected':''}${p.vendida?' vendida':''}"
              data-id="${p.id}" role="button" tabindex="${p.vendida?-1:0}"
              aria-label="${p.vendida?'Vendida: ':'Selecionar: '}${p.nome}">
@@ -329,15 +364,44 @@
           <div class="card-body">
             <p class="card-codigo">${p.id}</p>
             <p class="card-nome">${p.nome}</p>
-            <p class="card-tam">Tam. ${p.tam}</p>
-            ${!p.vendida ? `<p class="card-preco">R$ ${p.preco.toFixed(2).replace('.',',')}</p>` : ''}
+            ${tamCor ? `<p class="card-tam">${tamCor}</p>` : ''}
+            ${p.medidas ? `<p class="card-medidas">${p.medidas}</p>` : ''}
+            ${precoHtml}
           </div>
-        </div>`).join('');
+        </div>`;
+    }
 
-      document.querySelectorAll('.card:not(.vendida)').forEach(el => {
+    function bindCards(selector) {
+      document.querySelectorAll(`${selector} .card:not(.vendida)`).forEach(el => {
         el.addEventListener('click',   () => toggle(el.dataset.id));
         el.addEventListener('keydown', e => { if (e.key==='Enter') toggle(el.dataset.id); });
       });
+    }
+
+    function renderGrid() {
+      const principais = todasPecas.filter(p => p.cat !== 'Boho');
+      const boho       = todasPecas.filter(p => p.cat === 'Boho');
+      const lista      = filtroAtivo === 'todos' ? principais : principais.filter(p => p.cat === filtroAtivo);
+      const disp       = lista.filter(p => !p.vendida).length;
+
+      document.getElementById('js-contagem').textContent =
+        `${disp} peça${disp!==1?'s':''} disponível${disp!==1?'is':''}`;
+
+      if (!lista.length) {
+        document.getElementById('js-grid').innerHTML = `<div class="estado" style="grid-column:1/-1"><div class="estado-icone">🛍️</div><h3>Nenhuma peça aqui</h3><p>Tente outro filtro!</p></div>`;
+      } else {
+        document.getElementById('js-grid').innerHTML = lista.map(renderCard).join('');
+        bindCards('#js-grid');
+      }
+
+      const bohoSection = document.getElementById('js-boho-section');
+      if (boho.length) {
+        bohoSection.style.display = '';
+        document.getElementById('js-boho-grid').innerHTML = boho.map(renderCard).join('');
+        bindCards('#js-boho-grid');
+      } else {
+        bohoSection.style.display = 'none';
+      }
     }
 
     function toggle(id) {
@@ -365,10 +429,19 @@
       if (selecionadas.size === 0) return;
       const itens = [...selecionadas].map(id => {
         const p = todasPecas.find(x => x.id === id);
-        return `• ${p.nome} (${p.id}) — Tam. ${p.tam} — R$ ${p.preco.toFixed(2).replace('.',',')}`;
+        let linha = `• ${p.nome} (${p.id})`;
+        if (p.tam)  linha += ` — Tam. ${p.tam}`;
+        if (p.cor)  linha += ` · ${p.cor}`;
+        if (p.medidas) linha += `\n  Medidas: ${p.medidas}`;
+        if (p.parcelas && p.valorParcela) {
+          linha += `\n  Pix R$ ${p.preco.toFixed(2).replace('.',',')} | ${p.parcelas}x de R$ ${p.valorParcela.toFixed(2).replace('.',',')}`;
+        } else {
+          linha += ` — R$ ${p.preco.toFixed(2).replace('.',',')}`;
+        }
+        return linha;
       });
       const total = [...selecionadas].reduce((acc, id) => acc + (todasPecas.find(x=>x.id===id)?.preco||0), 0);
-      const msg = `Olá, ${ASSN}! 😊\n\nTenho interesse nas seguintes peças do ${NOME}:\n\n${itens.join('\n')}\n\nTotal: R$ ${total.toFixed(2).replace('.',',')}\n\nAinda estão disponíveis?`;
+      const msg = `Olá, ${ASSN}! 😊\n\nTenho interesse nas seguintes peças do ${NOME}:\n\n${itens.join('\n\n')}\n\nTotal (pix): R$ ${total.toFixed(2).replace('.',',')}\n\nAinda estão disponíveis?`;
       window.open(`https://wa.me/${TEL}?text=${encodeURIComponent(msg)}`, '_blank');
     }
 

@@ -45,16 +45,20 @@ exports.handler = async () => {
         : null;
 
       return {
-        id:       page.id,
-        nome:     p['Nome']?.title?.[0]?.plain_text        || 'Sem nome',
-        cat:      p['Categoria']?.select?.name             || 'Outros',
-        tam:      p['Tamanho']?.rich_text?.[0]?.plain_text || '',
-        preco:    p['Preço']?.number                       || 0,
-        desc:     p['Descrição']?.rich_text?.[0]?.plain_text || '',
-        emoji:    p['Emoji']?.rich_text?.[0]?.plain_text   || '👗',
-        nova:     p['Nova']?.checkbox                      || false,
-        vendida:  p['Vendida']?.checkbox                   || false,
-        foto:     fotoUrl,
+        id:           page.id,
+        nome:         p['Nome']?.title?.[0]?.plain_text          || 'Sem nome',
+        cat:          p['Categoria']?.select?.name               || 'Outros',
+        tam:          p['Tamanho']?.rich_text?.[0]?.plain_text   || '',
+        cor:          p['Cor']?.rich_text?.[0]?.plain_text       || '',
+        medidas:      p['Medidas']?.rich_text?.[0]?.plain_text   || '',
+        preco:        p['Preço']?.number                         || 0,
+        parcelas:     p['Parcelas']?.number                      || 0,
+        valorParcela: p['Valor Parcela']?.number                 || 0,
+        desc:         p['Descrição']?.rich_text?.[0]?.plain_text || '',
+        emoji:        p['Emoji']?.rich_text?.[0]?.plain_text     || '👗',
+        nova:         p['Nova']?.checkbox                        || false,
+        vendida:      p['Vendida']?.checkbox                     || false,
+        foto:         fotoUrl,
       };
     });
 
