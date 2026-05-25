@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brechó Balonê</title>
+  <meta name="description" content="Peças únicas com história. Brechó feminino com curadoria especial — Fê Bassi." />
+  <meta property="og:title" content="Brechó Balonê" />
+  <meta property="og:description" content="Curadoria especial. Moda com história e muito charme ✨" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --roxo:        #3D2B50;
+      --roxo-medio:  #7A5C8A;
+      --lilas:       #A87CC0;
+      --lilas-claro: #C9A8DC;
+      --lilas-pale:  #EDD5F7;
+      --fundo:       #FAF7FB;
+      --fundo-card:  #F7F2FC;
+      --borda:       #F0EAF5;
+      --text-muted:  #9B7DB5;
+      --white:       #ffffff;
+      --radius:      14px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; background: var(--fundo); color: var(--roxo); min-height: 100vh; }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--white); border-bottom: 1px solid var(--borda);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .header-inner {
+      max-width: 600px; margin: 0 auto; padding: 0 16px;
+      height: 56px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--roxo); text-decoration: none; line-height: 1; }
+    .logo small { display: block; font-size: 9px; letter-spacing: 0.24em; color: var(--lilas-claro); font-family: 'Jost', sans-serif; font-weight: 300; text-transform: uppercase; margin-top: 1px; }
+
+    .header-right { display: flex; align-items: center; gap: 10px; }
+
+    .btn-carrinho {
+      position: relative; display: flex; align-items: center; gap: 6px;
+      background: var(--roxo); color: var(--white); border: none;
+      border-radius: 22px; padding: 8px 14px 8px 12px;
+      font-size: 12px; font-weight: 600; cursor: pointer;
+      font-family: 'Jost', sans-serif; transition: opacity 0.15s;
+    }
+    .btn-carrinho:disabled { opacity: 0.3; cursor: default; }
+    .btn-carrinho svg { flex-shrink: 0; }
+    .carrinho-badge {
+      background: var(--lilas); color: var(--white);
+      border-radius: 50%; width: 18px; height: 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; flex-shrink: 0;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--fundo-card); padding: 32px 20px 28px;
+      text-align: center; border-bottom: 1px solid var(--borda);
+      position: relative; overflow: hidden;
+    }
+    .hero::before { content:''; position:absolute; width:200px; height:200px; border-radius:50%; background:var(--lilas-pale); opacity:0.5; top:-70px; right:-60px; pointer-events:none; }
+    .hero::after  { content:''; position:absolute; width:120px; height:120px; border-radius:50%; background:var(--lilas-pale); opacity:0.3; bottom:-30px; left:-30px; pointer-events:none; }
+
+    .hero-kicker { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lilas); margin-bottom: 12px; font-weight: 400; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 700; color: var(--roxo); line-height: 1.1; margin-bottom: 8px; }
+    .hero h1 em { color: var(--lilas); font-style: italic; font-weight: 500; }
+    .hero p { font-size: 13px; color: var(--text-muted); margin-bottom: 22px; line-height: 1.6; font-weight: 300; }
+    .hero-btns { display: flex; gap: 9px; justify-content: center; flex-wrap: wrap; }
+
+    .btn-dark {
+      background: var(--roxo); color: var(--white); border: none; border-radius: 28px;
+      padding: 12px 24px; font-size: 13px; font-weight: 600; cursor: pointer;
+      font-family: 'Jost', sans-serif; letter-spacing: 0.05em; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 7px;
+    }
+    .btn-ghost {
+      background: var(--white); color: var(--roxo); border: 1.5px solid var(--lilas-claro);
+      border-radius: 28px; padding: 12px 24px; font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: 'Jost', sans-serif; letter-spacing: 0.04em;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 7px;
+    }
+
+    /* ── HINT ── */
+    .hint { text-align: center; padding: 10px 16px 6px; font-size: 11px; color: var(--lilas-claro); letter-spacing: 0.04em; background: var(--white); border-bottom: 1px solid var(--borda); }
+
+    /* ── FILTROS ── */
+    .filtros-wrap { background: var(--white); border-bottom: 1px solid var(--borda); position: sticky; top: 56px; z-index: 90; }
+    .filtros {
+      max-width: 600px; margin: 0 auto; padding: 10px 14px;
+      display: flex; gap: 7px; overflow-x: auto; scrollbar-width: none;
+    }
+    .filtros::-webkit-scrollbar { display: none; }
+    .ftag {
+      padding: 6px 16px; border-radius: 20px; border: 1px solid var(--borda);
+      background: var(--white); font-size: 12px; color: var(--roxo-medio);
+      cursor: pointer; white-space: nowrap; font-family: 'Jost', sans-serif; font-weight: 500;
+      transition: all 0.15s;
+    }
+    .ftag.on { background: var(--roxo); color: var(--white); border-color: var(--roxo); }
+
+    /* ── GRID ── */
+    .container { max-width: 600px; margin: 0 auto; padding: 14px 14px 100px; }
+    .contagem { font-size: 11px; color: var(--lilas-claro); margin-bottom: 12px; letter-spacing: 0.04em; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+
+    /* ── CARD ── */
+    .card {
+      border-radius: var(--radius); overflow: hidden;
+      border: 2px solid transparent; background: var(--white);
+      cursor: pointer; transition: border-color 0.15s, transform 0.15s;
+    }
+    .card:hover { transform: translateY(-2px); }
+    .card.selected { border-color: var(--lilas); }
+    .card.vendida { opacity: 0.45; pointer-events: none; }
+
+    .card-foto {
+      width: 100%; aspect-ratio: 3/4; background: var(--fundo-card);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .card-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .card-foto-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 44px; }
+
+    .card-check {
+      position: absolute; top: 8px; right: 8px;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--white); border: 2px solid var(--lilas-claro);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s; z-index: 2;
+    }
+    .card.selected .card-check { background: var(--lilas); border-color: var(--lilas); }
+    .card-check svg { display: none; }
+    .card.selected .card-check svg { display: block; }
+
+    .card-badge { position: absolute; top: 8px; left: 8px; background: var(--lilas-pale); color: #5C3A78; font-size: 9px; font-weight: 600; padding: 3px 8px; border-radius: 10px; letter-spacing: 0.06em; text-transform: uppercase; font-family: 'Jost', sans-serif; z-index: 2; }
+    .card-vendida-tag { position: absolute; top: 8px; left: 8px; background: #e8e8e8; color: #999; font-size: 9px; font-weight: 600; padding: 3px 8px; border-radius: 10px; letter-spacing: 0.06em; text-transform: uppercase; font-family: 'Jost', sans-serif; z-index: 2; }
+
+    .card-body { padding: 10px 12px 12px; }
+    .card-codigo { font-size: 10px; color: var(--lilas-claro); letter-spacing: 0.1em; font-weight: 400; margin-bottom: 2px; }
+    .card-nome { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 500; color: var(--roxo); margin-bottom: 2px; line-height: 1.3; }
+    .card-tam { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; font-weight: 300; }
+    .card-preco { font-size: 14px; font-weight: 600; color: var(--roxo); }
+
+    /* ── ESTADOS ── */
+    .estado { text-align: center; padding: 4rem 1rem; color: var(--text-muted); }
+    .spinner { width: 28px; height: 28px; border: 3px solid var(--borda); border-top-color: var(--lilas); border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 12px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .estado-icone { font-size: 44px; margin-bottom: 12px; }
+    .estado h3 { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 500; margin-bottom: 6px; }
+    .estado p { font-size: 13px; font-weight: 300; }
+
+    /* ── BARRA CARRINHO ── */
+    .carrinho-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+      background: var(--white); border-top: 1px solid var(--borda);
+      padding: 12px 16px; display: flex; align-items: center; gap: 12px;
+      max-width: 600px; margin: 0 auto;
+    }
+    .carrinho-info { flex: 1; }
+    .carrinho-info strong { font-size: 13px; color: var(--roxo); font-weight: 600; display: block; }
+    .carrinho-info span { font-size: 11px; color: var(--text-muted); font-weight: 300; }
+
+    .btn-whats {
+      display: flex; align-items: center; gap: 7px;
+      background: #25D366; color: var(--white); border: none;
+      border-radius: 26px; padding: 12px 20px; font-size: 13px; font-weight: 700;
+      cursor: pointer; font-family: 'Jost', sans-serif; white-space: nowrap;
+      transition: opacity 0.15s;
+    }
+    .btn-whats:disabled { opacity: 0.3; cursor: default; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--roxo); padding: 28px 20px; text-align: center; margin-top: 0; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--lilas-pale); }
+    .footer-logo small { display: block; font-size: 9px; letter-spacing: 0.24em; color: var(--text-muted); font-family: 'Jost', sans-serif; font-weight: 300; margin-top: 2px; }
+    .footer-line { width: 28px; height: 1px; background: var(--roxo-medio); margin: 12px auto; }
+    footer p { font-size: 11px; color: var(--lilas-claro); line-height: 1.9; font-weight: 300; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <a href="#" class="logo">Balonê<small>Brechó · Fê Bassi</small></a>
+      <div class="header-right">
+        <button class="btn-carrinho" id="btn-carrinho-header" disabled onclick="enviarWhats()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span id="header-txt">0</span>
+          <span class="carrinho-badge" id="header-badge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <p class="hero-kicker">Brechó feminino · Curadoria especial</p>
+    <h1>Peças únicas,<br><em>estilo atemporal</em></h1>
+    <p>Moda com história e muito charme.<br>Novas peças toda semana.</p>
+    <div class="hero-btns">
+      <a href="#catalogo" class="btn-dark">Ver catálogo</a>
+      <a href="#" class="btn-ghost" id="link-whats-hero">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <p class="hint">Toque nas peças para selecionar · escolha quantas quiser antes de enviar</p>
+
+  <div class="filtros-wrap">
+    <div class="filtros" id="js-filtros">
+      <button class="ftag on" data-cat="todos">Tudo</button>
+    </div>
+  </div>
+
+  <div class="container" id="catalogo">
+    <p class="contagem" id="js-contagem"></p>
+    <div class="grid" id="js-grid"></div>
+  </div>
+
+  <div class="carrinho-bar">
+    <div class="carrinho-info">
+      <strong id="bar-titulo">Nenhuma peça selecionada</strong>
+      <span id="bar-total"></span>
+    </div>
+    <button class="btn-whats" id="btn-whats" disabled onclick="enviarWhats()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Enviar pedido
+    </button>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Balonê<small>BRECHÓ · FÊ BASSI</small></div>
+    <div class="footer-line"></div>
+    <p>Moda sustentável com personalidade</p>
+    <p>Selecione as peças e envie seu pedido pelo WhatsApp</p>
+  </footer>
+
+  <script src="config.js"></script>
+  <script>
+    const CFG   = window.BRECHO_CONFIG || {};
+    const NOME  = CFG.nomeBrecho  || 'Brechó Balonê';
+    const ASSN  = CFG.assinatura  || 'Fê Bassi';
+    const TEL   = CFG.whatsapp    || '5551992380878';
+
+    const msgGeral = encodeURIComponent(`Olá! Vi o catálogo do ${NOME} e quero saber mais 😊`);
+    document.getElementById('link-whats-hero').href = `https://wa.me/${TEL}?text=${msgGeral}`;
+
+    let todasPecas   = [];
+    let selecionadas = new Set();
+    let filtroAtivo  = 'todos';
+
+    async function carregarPecas() {
+      mostrarLoading();
+      try {
+        const resp = await fetch('/.netlify/functions/pecas');
+        if (!resp.ok) throw new Error(resp.status);
+        todasPecas = await resp.json();
+      } catch (e) {
+        console.warn('Notion não configurado:', e.message);
+        todasPecas = [
+          { id:'BAL-001', nome:'Trench coat caramelo',     cat:'Casacos',  tam:'M',  preco:180, emoji:'🧥', nova:true,  vendida:false, foto:null },
+          { id:'BAL-002', nome:'Vestido midi listrado',    cat:'Vestidos', tam:'P',  preco:95,  emoji:'👗', nova:true,  vendida:false, foto:null },
+          { id:'BAL-003', nome:'Blazer xadrez preto',      cat:'Casacos',  tam:'G',  preco:130, emoji:'🧥', nova:false, vendida:false, foto:null },
+          { id:'BAL-004', nome:'Vestido social branco',    cat:'Vestidos', tam:'M',  preco:110, emoji:'👗', nova:true,  vendida:false, foto:null },
+          { id:'BAL-005', nome:'Calça poá preto e branco', cat:'Calças',   tam:'38', preco:75,  emoji:'👖', nova:false, vendida:true,  foto:null },
+          { id:'BAL-006', nome:'Blusa de renda off-white', cat:'Blusas',   tam:'P',  preco:55,  emoji:'👚', nova:true,  vendida:false, foto:null },
+          { id:'BAL-007', nome:'Saia midi plissada lilás', cat:'Saias',    tam:'M',  preco:85,  emoji:'✨', nova:false, vendida:false, foto:null },
+          { id:'BAL-008', nome:'Casaco tweed rosê',        cat:'Casacos',  tam:'P',  preco:160, emoji:'🧥', nova:true,  vendida:false, foto:null },
+        ];
+      }
+      construirFiltros();
+      renderGrid();
+    }
+
+    function mostrarLoading() {
+      document.getElementById('js-grid').innerHTML = `<div class="estado" style="grid-column:1/-1"><div class="spinner"></div><p>Carregando peças...</p></div>`;
+    }
+
+    function construirFiltros() {
+      const cats = [...new Set(todasPecas.map(p => p.cat))].filter(Boolean).sort();
+      const wrap = document.getElementById('js-filtros');
+      wrap.innerHTML = '<button class="ftag on" data-cat="todos">Tudo</button>'
+        + cats.map(c => `<button class="ftag" data-cat="${c}">${c}</button>`).join('');
+      wrap.addEventListener('click', e => {
+        const btn = e.target.closest('.ftag');
+        if (!btn) return;
+        filtroAtivo = btn.dataset.cat;
+        wrap.querySelectorAll('.ftag').forEach(b => b.classList.remove('on'));
+        btn.classList.add('on');
+        renderGrid();
+      });
+    }
+
+    function renderGrid() {
+      const lista = filtroAtivo === 'todos' ? todasPecas : todasPecas.filter(p => p.cat === filtroAtivo);
+      const disp  = lista.filter(p => !p.vendida).length;
+      document.getElementById('js-contagem').textContent =
+        `${disp} peça${disp!==1?'s':''} disponível${disp!==1?'is':''}`;
+
+      if (!lista.length) {
+        document.getElementById('js-grid').innerHTML = `<div class="estado" style="grid-column:1/-1"><div class="estado-icone">🛍️</div><h3>Nenhuma peça aqui</h3><p>Tente outro filtro!</p></div>`;
+        return;
+      }
+
+      document.getElementById('js-grid').innerHTML = lista.map(p => `
+        <div class="card${selecionadas.has(p.id)?' selected':''}${p.vendida?' vendida':''}"
+             data-id="${p.id}" role="button" tabindex="${p.vendida?-1:0}"
+             aria-label="${p.vendida?'Vendida: ':'Selecionar: '}${p.nome}">
+          <div class="card-foto">
+            ${p.foto ? `<img src="${p.foto}" alt="${p.nome}" loading="lazy" />` : `<div class="card-foto-placeholder">${p.emoji||'👗'}</div>`}
+            ${p.nova&&!p.vendida ? '<span class="card-badge">Novidade</span>' : ''}
+            ${p.vendida ? '<span class="card-vendida-tag">Vendida</span>' : ''}
+            <div class="card-check">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-codigo">${p.id}</p>
+            <p class="card-nome">${p.nome}</p>
+            <p class="card-tam">Tam. ${p.tam}</p>
+            ${!p.vendida ? `<p class="card-preco">R$ ${p.preco.toFixed(2).replace('.',',')}</p>` : ''}
+          </div>
+        </div>`).join('');
+
+      document.querySelectorAll('.card:not(.vendida)').forEach(el => {
+        el.addEventListener('click',   () => toggle(el.dataset.id));
+        el.addEventListener('keydown', e => { if (e.key==='Enter') toggle(el.dataset.id); });
+      });
+    }
+
+    function toggle(id) {
+      selecionadas.has(id) ? selecionadas.delete(id) : selecionadas.add(id);
+      atualizarCarrinho();
+      renderGrid();
+    }
+
+    function atualizarCarrinho() {
+      const n     = selecionadas.size;
+      const total = [...selecionadas].reduce((acc, id) => acc + (todasPecas.find(x=>x.id===id)?.preco||0), 0);
+
+      document.getElementById('header-badge').textContent = n;
+      document.getElementById('header-txt').textContent   = n;
+      document.getElementById('btn-carrinho-header').disabled = n === 0;
+      document.getElementById('btn-whats').disabled           = n === 0;
+
+      document.getElementById('bar-titulo').textContent =
+        n === 0 ? 'Nenhuma peça selecionada' : `${n} peça${n!==1?'s':''} selecionada${n!==1?'s':''}`;
+      document.getElementById('bar-total').textContent =
+        n > 0 ? `Total: R$ ${total.toFixed(2).replace('.',',')}` : '';
+    }
+
+    function enviarWhats() {
+      if (selecionadas.size === 0) return;
+      const itens = [...selecionadas].map(id => {
+        const p = todasPecas.find(x => x.id === id);
+        return `• ${p.nome} (${p.id}) — Tam. ${p.tam} — R$ ${p.preco.toFixed(2).replace('.',',')}`;
+      });
+      const total = [...selecionadas].reduce((acc, id) => acc + (todasPecas.find(x=>x.id===id)?.preco||0), 0);
+      const msg = `Olá, ${ASSN}! 😊\n\nTenho interesse nas seguintes peças do ${NOME}:\n\n${itens.join('\n')}\n\nTotal: R$ ${total.toFixed(2).replace('.',',')}\n\nAinda estão disponíveis?`;
+      window.open(`https://wa.me/${TEL}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    carregarPecas();
+  </script>
+</body>
+</html>
