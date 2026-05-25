@@ -192,7 +192,8 @@
     .card-parcelas { font-size: 11px; color: var(--lilas); font-weight: 500; }
     .card-medidas { font-size: 10px; color: var(--text-muted); margin-bottom: 5px; font-weight: 300; }
 
-    /* ── BOTÃO BOHO ── */
+    /* ── BOTÕES ESPECIAIS ── */
+    .btns-especiais { display: flex; gap: 8px; justify-content: center; padding: 0 14px 10px; flex-wrap: wrap; }
     .btn-boho {
       display: inline-flex; align-items: center; gap: 6px;
       background: linear-gradient(135deg, #2B1648, #1C0F2E);
@@ -203,6 +204,36 @@
       transition: border-color 0.15s, box-shadow 0.15s;
     }
     .btn-boho:hover { border-color: #E8C97A; box-shadow: 0 0 10px rgba(232,201,122,0.2); }
+    .btn-museu {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, #2C1A0A, #1A1208);
+      color: #C8952A; border: 1px solid rgba(200,149,42,0.3);
+      border-radius: 20px; padding: 7px 18px;
+      font-size: 12px; font-weight: 600; font-family: 'Jost', sans-serif;
+      letter-spacing: 0.04em; text-decoration: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .btn-museu:hover { border-color: #C8952A; box-shadow: 0 0 10px rgba(200,149,42,0.2); }
+
+    /* ── MINI MUSEU ── */
+    .museu-section { background: linear-gradient(160deg, #1A1208 0%, #2C1A0A 100%); padding: 32px 0 0; }
+    .museu-header { max-width: 600px; margin: 0 auto; padding: 0 20px 20px; text-align: center; }
+    .museu-titulo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #C8952A; margin-bottom: 6px; }
+    .museu-sub { font-size: 12px; color: #C4A882; font-weight: 300; letter-spacing: 0.05em; }
+    .museu-divider { width: 36px; height: 1px; background: #6B4A1A; margin: 10px auto 0; }
+    .museu-section .card { background: #231509; border: 2px solid #3D2510; }
+    .museu-section .card:hover { border-color: rgba(200,149,42,0.4); }
+    .museu-section .card.selected { border-color: #C8952A; }
+    .museu-section .card.selected .card-check { background: #C8952A; border-color: #C8952A; }
+    .museu-section .card-check { border-color: #6B4A1A; }
+    .museu-section .card-foto { background: #1A1208; }
+    .museu-section .card-badge { background: rgba(200,149,42,0.15); color: #C8952A; }
+    .museu-section .card-codigo { color: #6B4A1A; }
+    .museu-section .card-nome { color: #F5E6C8; }
+    .museu-section .card-tam { color: #9C7A50; }
+    .museu-section .card-medidas { color: #7A5A30; }
+    .museu-section .card-preco { color: #C8952A; }
+    .museu-section .card-parcelas { color: #C4A882; }
 
     /* ── BOHO ── */
     .boho-section { background: linear-gradient(160deg, #1C0F2E 0%, #2B1648 100%); padding: 32px 0 0; }
@@ -259,14 +290,26 @@
     <div class="filtros" id="js-filtros">
       <button class="ftag on" data-cat="todos">Tudo</button>
     </div>
-    <div style="display:flex; justify-content:center; padding: 0 14px 10px;">
-      <a href="#js-boho-section" class="btn-boho">🔮 Espaço Balonê Boho</a>
+    <div class="btns-especiais">
+      <a href="#js-museu-section" class="btn-museu">🏺 Mini Museu</a>
+      <a href="#js-boho-section" class="btn-boho">🔮 Espaço Boho</a>
     </div>
   </div>
 
   <div class="container" id="catalogo">
     <p class="contagem" id="js-contagem"></p>
     <div class="grid" id="js-grid"></div>
+  </div>
+
+  <div class="museu-section" id="js-museu-section" style="display:none">
+    <div class="museu-header">
+      <p class="museu-titulo">🏺 Mini Museu Balonê</p>
+      <p class="museu-sub">Produtos retrô com história e personalidade</p>
+      <div class="museu-divider"></div>
+    </div>
+    <div class="container">
+      <div class="grid" id="js-museu-grid"></div>
+    </div>
   </div>
 
   <div class="boho-section" id="js-boho-section" style="display:none">
@@ -331,8 +374,10 @@
           { id:'BAL-008', nome:'Casaco tweed rosê',        cat:'Casacos',  cor:'Rosê',          tam:'P',  medidas:'Busto 88cm',               preco:380, parcelas:10, valorParcela:39,  emoji:'🧥', nova:true,  vendida:false, foto:null },
           { id:'BAL-009', nome:'Bolsa de couro caramelo',  cat:'Bolsas',   cor:'Caramelo',      tam:'',   medidas:'30×20×10cm',               preco:320, parcelas:10, valorParcela:33,  emoji:'👜', nova:true,  vendida:false, foto:null },
           { id:'BAL-010', nome:'Óculos gatinho vintage',   cat:'Óculos',   cor:'Tartaruga',     tam:'',   medidas:'',                         preco:120, parcelas:3,  valorParcela:42,  emoji:'🕶️', nova:false, vendida:false, foto:null },
-          { id:'BOH-001', nome:'Cristal ametista natural', cat:'Boho',     cor:'Roxo',          tam:'',   medidas:'',                         preco:65,  parcelas:0,  valorParcela:0,   emoji:'🔮', nova:true,  vendida:false, foto:null },
-          { id:'BOH-002', nome:'Kit velas aromáticas',     cat:'Boho',     cor:'',              tam:'',   medidas:'',                         preco:45,  parcelas:0,  valorParcela:0,   emoji:'🕯️', nova:false, vendida:false, foto:null },
+          { id:'BOH-001', nome:'Cristal ametista natural', cat:'Boho',      cor:'Roxo', tam:'', medidas:'', preco:65, parcelas:0, valorParcela:0, emoji:'🔮', nova:true,  vendida:false, foto:null },
+          { id:'BOH-002', nome:'Kit velas aromáticas',     cat:'Boho',      cor:'',    tam:'', medidas:'', preco:45, parcelas:0, valorParcela:0, emoji:'🕯️', nova:false, vendida:false, foto:null },
+          { id:'MUS-001', nome:'Bolsa de mão anos 70',     cat:'Mini Museu',cor:'Bege',tam:'', medidas:'25×15cm', preco:180, parcelas:3, valorParcela:62, emoji:'👜', nova:true,  vendida:false, foto:null },
+          { id:'MUS-002', nome:'Óculos aviador vintage',   cat:'Mini Museu',cor:'Dourado',tam:'',medidas:'',     preco:95,  parcelas:0, valorParcela:0,  emoji:'🕶️', nova:false, vendida:false, foto:null },
         ];
       }
       construirFiltros();
@@ -344,7 +389,8 @@
     }
 
     function construirFiltros() {
-      const cats = [...new Set(todasPecas.filter(p => p.cat !== 'Boho').map(p => p.cat))].filter(Boolean).sort();
+      const especiais = ['Boho', 'Mini Museu'];
+      const cats = [...new Set(todasPecas.filter(p => !especiais.includes(p.cat)).map(p => p.cat))].filter(Boolean).sort();
       const wrap = document.getElementById('js-filtros');
       wrap.innerHTML = '<button class="ftag on" data-cat="todos">Tudo</button>'
         + cats.map(c => `<button class="ftag" data-cat="${c}">${c}</button>`).join('');
@@ -394,8 +440,10 @@
     }
 
     function renderGrid() {
-      const principais = todasPecas.filter(p => p.cat !== 'Boho');
+      const especiais  = ['Boho', 'Mini Museu'];
+      const principais = todasPecas.filter(p => !especiais.includes(p.cat));
       const boho       = todasPecas.filter(p => p.cat === 'Boho');
+      const museu      = todasPecas.filter(p => p.cat === 'Mini Museu');
       const lista      = filtroAtivo === 'todos' ? principais : principais.filter(p => p.cat === filtroAtivo);
       const disp       = lista.filter(p => !p.vendida).length;
 
@@ -407,6 +455,15 @@
       } else {
         document.getElementById('js-grid').innerHTML = lista.map(renderCard).join('');
         bindCards('#js-grid');
+      }
+
+      const museuSection = document.getElementById('js-museu-section');
+      if (museu.length) {
+        museuSection.style.display = '';
+        document.getElementById('js-museu-grid').innerHTML = museu.map(renderCard).join('');
+        bindCards('#js-museu-grid');
+      } else {
+        museuSection.style.display = 'none';
       }
 
       const bohoSection = document.getElementById('js-boho-section');
