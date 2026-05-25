@@ -1,6 +1,35 @@
-// netlify/functions/pecas.js
-// Esta função roda no servidor do Netlify e busca as peças do Notion.
-// Ela resolve o problema de CORS (bloqueio do navegador direto na API do Notion).
+const https = require('https');
+
+function notionQuery(token, database) {
+  return new Promise((resolve, reject) => {
+    const body = JSON.stringify({
+      page_size: 100,
+      sorts: [{ property: 'Vendida', direction: 'ascending' }],
+    });
+
+    const options = {
+      hostname: 'api.notion.com',
+      path: `/v1/databases/${database}/query`,
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Notion-Version': '2022-06-28',
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(body),
+      },
+    };
+
+    const req = https.request(options, (res) => {
+      let data = '';
+      res.on('data', chunk => { data += chunk; });
+      res.on('end', () => resolve({ status: res.statusCode, body: data }));
+    });
+
+    req.on('error', reject);
+    req.write(body);
+    req.end();
+  });
+}
 
 exports.handler = async () => {
   const token    = process.env.NOTION_TOKEN;
@@ -14,31 +43,17 @@ exports.handler = async () => {
   }
 
   try {
-    const resp = await fetch(`https://api.notion.com/v1/databases/${database}/query`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Notion-Version': '2022-06-28',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        page_size: 100,
-        sorts: [{ property: 'Vendida', direction: 'ascending' }],
-      }),
-    });
+    const response = await notionQuery(token, database);
 
-    if (!resp.ok) {
-      const err = await resp.text();
-      return { statusCode: resp.status, body: JSON.stringify({ error: err }) };
+    if (response.status !== 200) {
+      return { statusCode: response.status, body: JSON.stringify({ error: response.body }) };
     }
 
-    const data = await resp.json();
+    const data = JSON.parse(response.body);
 
-    // Transforma o formato bruto do Notion em algo simples para o site
     const pecas = data.results.map(page => {
       const p = page.properties;
 
-      // Pega a URL da foto (pode ser upload direto ou link externo)
       const fotos = p['Foto']?.files || [];
       const fotoUrl = fotos.length > 0
         ? (fotos[0].type === 'external' ? fotos[0].external.url : fotos[0].file.url)
@@ -64,7 +79,7 @@ exports.handler = async () => {
 
     return {
       statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
       body: JSON.stringify(pecas),
     };
 
