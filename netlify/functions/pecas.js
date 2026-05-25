@@ -68,6 +68,7 @@ exports.handler = async () => {
         cor:          p['Cor']?.rich_text?.[0]?.plain_text       || '',
         medidas:      p['Medidas']?.rich_text?.[0]?.plain_text   || '',
         preco:        p['Preço']?.number                         || 0,
+        precoPix:     p['Preço PIX']?.number                     || 0,
         parcelas:     p['Parcelas']?.number                      || 0,
         valorParcela: p['Valor Parcela']?.number                 || 0,
         desc:         p['Descrição']?.rich_text?.[0]?.plain_text || '',

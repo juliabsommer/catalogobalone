@@ -371,20 +371,20 @@
       } catch (e) {
         console.warn('Notion não configurado:', e.message);
         todasPecas = [
-          { id:'BAL-001', nome:'Trench coat caramelo',     cat:'Casacos',  cor:'Caramelo',      tam:'M',  medidas:'Busto 92cm · Comp. 110cm', preco:289, parcelas:3,  valorParcela:100, emoji:'🧥', nova:true,  vendida:false, foto:null },
-          { id:'BAL-002', nome:'Vestido midi listrado',    cat:'Vestidos', cor:'Azul e branco', tam:'P',  medidas:'Busto 86cm',               preco:95,  parcelas:0,  valorParcela:0,   emoji:'👗', nova:true,  vendida:false, foto:null },
-          { id:'BAL-003', nome:'Blazer xadrez preto',      cat:'Casacos',  cor:'Preto',         tam:'G',  medidas:'Busto 98cm',               preco:130, parcelas:3,  valorParcela:45,  emoji:'🧥', nova:false, vendida:false, foto:null },
-          { id:'BAL-004', nome:'Vestido social branco',    cat:'Vestidos', cor:'Off-white',     tam:'M',  medidas:'Busto 90cm',               preco:110, parcelas:0,  valorParcela:0,   emoji:'👗', nova:true,  vendida:false, foto:null },
-          { id:'BAL-005', nome:'Calça poá preto e branco', cat:'Calças',   cor:'Preto e branco',tam:'38', medidas:'Cintura 70cm',             preco:75,  parcelas:0,  valorParcela:0,   emoji:'👖', nova:false, vendida:true,  foto:null },
-          { id:'BAL-006', nome:'Blusa de renda off-white', cat:'Blusas',   cor:'Off-white',     tam:'P',  medidas:'Busto 84cm',               preco:55,  parcelas:0,  valorParcela:0,   emoji:'👚', nova:true,  vendida:false, foto:null },
-          { id:'BAL-007', nome:'Saia midi plissada lilás', cat:'Saias',    cor:'Lilás',         tam:'M',  medidas:'Cintura 68cm',             preco:85,  parcelas:0,  valorParcela:0,   emoji:'✨', nova:false, vendida:false, foto:null },
-          { id:'BAL-008', nome:'Casaco tweed rosê',        cat:'Casacos',  cor:'Rosê',          tam:'P',  medidas:'Busto 88cm',               preco:380, parcelas:10, valorParcela:39,  emoji:'🧥', nova:true,  vendida:false, foto:null },
-          { id:'BAL-009', nome:'Bolsa de couro caramelo',  cat:'Bolsas',   cor:'Caramelo',      tam:'',   medidas:'30×20×10cm',               preco:320, parcelas:10, valorParcela:33,  emoji:'👜', nova:true,  vendida:false, foto:null },
-          { id:'BAL-010', nome:'Óculos gatinho vintage',   cat:'Óculos',   cor:'Tartaruga',     tam:'',   medidas:'',                         preco:120, parcelas:3,  valorParcela:42,  emoji:'🕶️', nova:false, vendida:false, foto:null },
-          { id:'BOH-001', nome:'Cristal ametista natural', cat:'Boho',      cor:'Roxo', tam:'', medidas:'', preco:65, parcelas:0, valorParcela:0, emoji:'🔮', nova:true,  vendida:false, foto:null },
-          { id:'BOH-002', nome:'Kit velas aromáticas',     cat:'Boho',      cor:'',    tam:'', medidas:'', preco:45, parcelas:0, valorParcela:0, emoji:'🕯️', nova:false, vendida:false, foto:null },
-          { id:'MUS-001', nome:'Bolsa de mão anos 70',     cat:'Mini Museu',cor:'Bege',tam:'', medidas:'25×15cm', preco:180, parcelas:3, valorParcela:62, emoji:'👜', nova:true,  vendida:false, foto:null },
-          { id:'MUS-002', nome:'Óculos aviador vintage',   cat:'Mini Museu',cor:'Dourado',tam:'',medidas:'',     preco:95,  parcelas:0, valorParcela:0,  emoji:'🕶️', nova:false, vendida:false, foto:null },
+          { id:'BAL-001', codigo:'BAL-001', nome:'Trench coat caramelo',     cat:'Casacos',  cor:'Caramelo',      tam:'M',  medidas:'Busto 92cm · Comp. 110cm', preco:320, precoPix:289, parcelas:3,  valorParcela:107, emoji:'🧥', nova:true,  vendida:false, foto:null },
+          { id:'BAL-002', codigo:'BAL-002', nome:'Vestido midi listrado',    cat:'Vestidos', cor:'Azul e branco', tam:'P',  medidas:'Busto 86cm',               preco:95,  precoPix:85,  parcelas:0,  valorParcela:0,   emoji:'👗', nova:true,  vendida:false, foto:null },
+          { id:'BAL-003', codigo:'BAL-003', nome:'Blazer xadrez preto',      cat:'Casacos',  cor:'Preto',         tam:'G',  medidas:'Busto 98cm',               preco:130, precoPix:115, parcelas:3,  valorParcela:45,  emoji:'🧥', nova:false, vendida:false, foto:null },
+          { id:'BAL-004', codigo:'BAL-004', nome:'Vestido social branco',    cat:'Vestidos', cor:'Off-white',     tam:'M',  medidas:'Busto 90cm',               preco:110, precoPix:95,  parcelas:0,  valorParcela:0,   emoji:'👗', nova:true,  vendida:false, foto:null },
+          { id:'BAL-005', codigo:'BAL-005', nome:'Calça poá preto e branco', cat:'Calças',   cor:'Preto e branco',tam:'38', medidas:'Cintura 70cm',             preco:75,  precoPix:65,  parcelas:0,  valorParcela:0,   emoji:'👖', nova:false, vendida:true,  foto:null },
+          { id:'BAL-006', codigo:'BAL-006', nome:'Blusa de renda off-white', cat:'Blusas',   cor:'Off-white',     tam:'P',  medidas:'Busto 84cm',               preco:55,  precoPix:50,  parcelas:0,  valorParcela:0,   emoji:'👚', nova:true,  vendida:false, foto:null },
+          { id:'BAL-007', codigo:'BAL-007', nome:'Saia midi plissada lilás', cat:'Saias',    cor:'Lilás',         tam:'M',  medidas:'Cintura 68cm',             preco:85,  precoPix:75,  parcelas:0,  valorParcela:0,   emoji:'✨', nova:false, vendida:false, foto:null },
+          { id:'BAL-008', codigo:'BAL-008', nome:'Casaco tweed rosê',        cat:'Casacos',  cor:'Rosê',          tam:'P',  medidas:'Busto 88cm',               preco:380, precoPix:340, parcelas:10, valorParcela:39,  emoji:'🧥', nova:true,  vendida:false, foto:null },
+          { id:'BAL-009', codigo:'BAL-009', nome:'Bolsa de couro caramelo',  cat:'Bolsas',   cor:'Caramelo',      tam:'',   medidas:'30×20×10cm',               preco:320, precoPix:290, parcelas:10, valorParcela:33,  emoji:'👜', nova:true,  vendida:false, foto:null },
+          { id:'BAL-010', codigo:'BAL-010', nome:'Óculos gatinho vintage',   cat:'Óculos',   cor:'Tartaruga',     tam:'',   medidas:'',                         preco:120, precoPix:105, parcelas:3,  valorParcela:42,  emoji:'🕶️', nova:false, vendida:false, foto:null },
+          { id:'BOH-001', codigo:'BOH-001', nome:'Cristal ametista natural', cat:'Boho',      cor:'Roxo', tam:'', medidas:'', preco:65,  precoPix:55,  parcelas:0, valorParcela:0, emoji:'🔮', nova:true,  vendida:false, foto:null },
+          { id:'BOH-002', codigo:'BOH-002', nome:'Kit velas aromáticas',     cat:'Boho',      cor:'',    tam:'', medidas:'', preco:45,  precoPix:40,  parcelas:0, valorParcela:0, emoji:'🕯️', nova:false, vendida:false, foto:null },
+          { id:'MUS-001', codigo:'MUS-001', nome:'Bolsa de mão anos 70',     cat:'Mini Museu',cor:'Bege',tam:'', medidas:'25×15cm', preco:180, precoPix:160, parcelas:3, valorParcela:62, emoji:'👜', nova:true,  vendida:false, foto:null },
+          { id:'MUS-002', codigo:'MUS-002', nome:'Óculos aviador vintage',   cat:'Mini Museu',cor:'Dourado',tam:'',medidas:'',     preco:95,  precoPix:80,  parcelas:0, valorParcela:0,  emoji:'🕶️', nova:false, vendida:false, foto:null },
         ];
       }
       construirFiltros();
@@ -413,9 +413,10 @@
 
     function renderCard(p) {
       const tamCor = [p.tam ? `Tam. ${p.tam}` : '', p.cor].filter(Boolean).join(' · ');
+      const pixVal = p.precoPix || p.preco;
       const precoHtml = !p.vendida ? `
-        <p class="card-preco">${p.parcelas ? 'Pix ' : ''}R$ ${p.preco.toFixed(2).replace('.',',')}</p>
-        ${p.parcelas && p.valorParcela ? `<p class="card-parcelas">${p.parcelas}x de R$ ${p.valorParcela.toFixed(2).replace('.',',')}</p>` : ''}
+        <p class="card-preco">Pix R$ ${pixVal.toFixed(2).replace('.',',')}</p>
+        ${p.parcelas && p.valorParcela ? `<p class="card-parcelas">Cartão: ${p.parcelas}x de R$ ${p.valorParcela.toFixed(2).replace('.',',')}</p>` : ''}
       ` : '';
       return `
         <div class="card${selecionadas.has(p.id)?' selected':''}${p.vendida?' vendida':''}"
@@ -491,7 +492,10 @@
 
     function atualizarCarrinho() {
       const n     = selecionadas.size;
-      const total = [...selecionadas].reduce((acc, id) => acc + (todasPecas.find(x=>x.id===id)?.preco||0), 0);
+      const total = [...selecionadas].reduce((acc, id) => {
+        const p = todasPecas.find(x=>x.id===id);
+        return acc + (p?.precoPix || p?.preco || 0);
+      }, 0);
 
       document.getElementById('header-badge').textContent = n;
       document.getElementById('header-txt').textContent   = n;
@@ -508,19 +512,23 @@
       if (selecionadas.size === 0) return;
       const itens = [...selecionadas].map(id => {
         const p = todasPecas.find(x => x.id === id);
-        let linha = `• ${p.nome} (${p.id})`;
+        const pixVal = p.precoPix || p.preco;
+        let linha = p.codigo ? `• [${p.codigo}] ${p.nome}` : `• ${p.nome}`;
         if (p.tam)  linha += ` — Tam. ${p.tam}`;
         if (p.cor)  linha += ` · ${p.cor}`;
         if (p.medidas) linha += `\n  Medidas: ${p.medidas}`;
         if (p.parcelas && p.valorParcela) {
-          linha += `\n  Pix R$ ${p.preco.toFixed(2).replace('.',',')} | ${p.parcelas}x de R$ ${p.valorParcela.toFixed(2).replace('.',',')}`;
+          linha += `\n  PIX: R$ ${pixVal.toFixed(2).replace('.',',')} | Cartão: ${p.parcelas}x de R$ ${p.valorParcela.toFixed(2).replace('.',',')}`;
         } else {
-          linha += ` — R$ ${p.preco.toFixed(2).replace('.',',')}`;
+          linha += `\n  PIX: R$ ${pixVal.toFixed(2).replace('.',',')}`;
         }
         return linha;
       });
-      const total = [...selecionadas].reduce((acc, id) => acc + (todasPecas.find(x=>x.id===id)?.preco||0), 0);
-      const msg = `Olá, ${ASSN}! 😊\n\nTenho interesse nas seguintes peças do ${NOME}:\n\n${itens.join('\n\n')}\n\nTotal (pix): R$ ${total.toFixed(2).replace('.',',')}\n\nAinda estão disponíveis?`;
+      const total = [...selecionadas].reduce((acc, id) => {
+        const p = todasPecas.find(x=>x.id===id);
+        return acc + (p?.precoPix || p?.preco || 0);
+      }, 0);
+      const msg = `Olá, ${ASSN}! 😊\n\nTenho interesse nas seguintes peças do ${NOME}:\n\n${itens.join('\n\n')}\n\nTotal PIX: R$ ${total.toFixed(2).replace('.',',')}\n\nAinda estão disponíveis?`;
       window.open(`https://wa.me/${TEL}?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
