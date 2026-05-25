@@ -61,6 +61,7 @@ exports.handler = async () => {
 
       return {
         id:           page.id,
+        codigo:       p['Código']?.rich_text?.[0]?.plain_text    || '',
         nome:         p['Nome']?.title?.[0]?.plain_text          || 'Sem nome',
         cat:          p['Categoria']?.select?.name               || 'Outros',
         tam:          p['Tamanho']?.rich_text?.[0]?.plain_text   || '',

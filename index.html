@@ -426,7 +426,7 @@
             </div>
           </div>
           <div class="card-body">
-            <p class="card-codigo">${p.id}</p>
+            ${p.codigo ? `<p class="card-codigo">${p.codigo}</p>` : ''}
             <p class="card-nome">${p.nome}</p>
             ${tamCor ? `<p class="card-tam">${tamCor}</p>` : ''}
             ${p.medidas ? `<p class="card-medidas">${p.medidas}</p>` : ''}
