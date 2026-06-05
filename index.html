@@ -428,7 +428,7 @@
     function otimizarFoto(url) {
       if (!url) return null;
       // Netlify Image CDN: redimensiona para 600px e comprime para 75% — cacheia automaticamente
-      return `/.netlify/images?url=${encodeURIComponent(url)}&w=600&q=75&fit=cover`;
+      return `/.netlify/images?url=${encodeURIComponent(url)}&w=600&q=75`;
     }
 
     function renderCard(p) {
