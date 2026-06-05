@@ -23,15 +23,15 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --roxo:        #3D2B50;
-      --roxo-medio:  #7A5C8A;
-      --lilas:       #A87CC0;
-      --lilas-claro: #C9A8DC;
-      --lilas-pale:  #EDD5F7;
-      --fundo:       #FAF7FB;
-      --fundo-card:  #F7F2FC;
-      --borda:       #F0EAF5;
-      --text-muted:  #9B7DB5;
+      --roxo:        #2A1412;
+      --roxo-medio:  #7A4A4A;
+      --lilas:       #9B3535;
+      --lilas-claro: #C4A0A0;
+      --lilas-pale:  #F0DDD8;
+      --fundo:       #FAF0EB;
+      --fundo-card:  #F5E8E2;
+      --borda:       #E8D4CE;
+      --text-muted:  #B08080;
       --white:       #ffffff;
       --radius:      14px;
     }
@@ -137,7 +137,7 @@
     }
     .card-foto::after {
       content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
-      background: linear-gradient(90deg, var(--lilas-pale) 25%, #f8eefe 50%, var(--lilas-pale) 75%);
+      background: linear-gradient(90deg, var(--lilas-pale) 25%, #faeae4 50%, var(--lilas-pale) 75%);
       background-size: 200% 100%;
       animation: shimmer 1.4s infinite;
       transition: opacity 0.3s;
@@ -163,7 +163,7 @@
     .card-check svg { display: none; }
     .card.selected .card-check svg { display: block; }
 
-    .card-badge { position: absolute; top: 8px; left: 8px; background: var(--lilas-pale); color: #5C3A78; font-size: 9px; font-weight: 600; padding: 3px 8px; border-radius: 10px; letter-spacing: 0.06em; text-transform: uppercase; font-family: 'Jost', sans-serif; z-index: 2; }
+    .card-badge { position: absolute; top: 8px; left: 8px; background: var(--lilas-pale); color: #7A2A2A; font-size: 9px; font-weight: 600; padding: 3px 8px; border-radius: 10px; letter-spacing: 0.06em; text-transform: uppercase; font-family: 'Jost', sans-serif; z-index: 2; }
     .card-vendida-tag { position: absolute; top: 8px; left: 8px; background: #e8e8e8; color: #999; font-size: 9px; font-weight: 600; padding: 3px 8px; border-radius: 10px; letter-spacing: 0.06em; text-transform: uppercase; font-family: 'Jost', sans-serif; z-index: 2; }
 
     .card-body { padding: 10px 12px 12px; }
@@ -216,14 +216,14 @@
     .btns-especiais { display: flex; gap: 8px; justify-content: center; padding: 0 14px 10px; flex-wrap: wrap; }
     .btn-boho {
       display: inline-flex; align-items: center; gap: 6px;
-      background: linear-gradient(135deg, #2B1648, #1C0F2E);
-      color: #E8C97A; border: 1px solid rgba(232,201,122,0.3);
+      background: linear-gradient(135deg, #3C1A1A, #2A1010);
+      color: #D4A878; border: 1px solid rgba(212,168,120,0.35);
       border-radius: 20px; padding: 7px 18px;
       font-size: 12px; font-weight: 600; font-family: 'Jost', sans-serif;
       letter-spacing: 0.04em; text-decoration: none;
       transition: border-color 0.15s, box-shadow 0.15s;
     }
-    .btn-boho:hover { border-color: #E8C97A; box-shadow: 0 0 10px rgba(232,201,122,0.2); }
+    .btn-boho:hover { border-color: #D4A878; box-shadow: 0 0 10px rgba(212,168,120,0.2); }
     .btn-museu {
       display: inline-flex; align-items: center; gap: 6px;
       background: linear-gradient(135deg, #2C1A0A, #1A1208);
@@ -256,24 +256,24 @@
     .museu-section .card-parcelas { color: #C4A882; }
 
     /* ── BOHO ── */
-    .boho-section { background: linear-gradient(160deg, #1C0F2E 0%, #2B1648 100%); padding: 32px 0 0; }
+    .boho-section { background: linear-gradient(160deg, #2A1010 0%, #3C1A1A 100%); padding: 32px 0 0; }
     .boho-header { max-width: 600px; margin: 0 auto; padding: 0 20px 20px; text-align: center; }
-    .boho-titulo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #E8C97A; margin-bottom: 6px; }
-    .boho-sub { font-size: 12px; color: #B8A4C9; font-weight: 300; letter-spacing: 0.05em; }
-    .boho-divider { width: 36px; height: 1px; background: #6B4FA0; margin: 10px auto 0; }
-    .boho-section .card { background: #271540; border: 2px solid #3D2560; }
-    .boho-section .card:hover { border-color: rgba(232,201,122,0.4); }
-    .boho-section .card.selected { border-color: #E8C97A; }
-    .boho-section .card.selected .card-check { background: #E8C97A; border-color: #E8C97A; }
-    .boho-section .card-check { border-color: #6B4FA0; }
-    .boho-section .card-foto { background: #1C0F2E; }
-    .boho-section .card-badge { background: rgba(232,201,122,0.15); color: #E8C97A; }
-    .boho-section .card-codigo { color: #6B4FA0; }
-    .boho-section .card-nome { color: #E8D5FF; }
-    .boho-section .card-tam { color: #9B7DB5; }
-    .boho-section .card-preco { color: #E8C97A; }
-    .boho-section .card-parcelas { color: #C9A8DC; }
-    .boho-section .card-medidas { color: #7A5C8A; }
+    .boho-titulo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #D4A878; margin-bottom: 6px; }
+    .boho-sub { font-size: 12px; color: #C4A090; font-weight: 300; letter-spacing: 0.05em; }
+    .boho-divider { width: 36px; height: 1px; background: #7A4040; margin: 10px auto 0; }
+    .boho-section .card { background: #231010; border: 2px solid #4A2020; }
+    .boho-section .card:hover { border-color: rgba(212,168,120,0.45); }
+    .boho-section .card.selected { border-color: #D4A878; }
+    .boho-section .card.selected .card-check { background: #D4A878; border-color: #D4A878; }
+    .boho-section .card-check { border-color: #7A4040; }
+    .boho-section .card-foto { background: #1E0C0C; }
+    .boho-section .card-badge { background: rgba(212,168,120,0.15); color: #D4A878; }
+    .boho-section .card-codigo { color: #9B5A5A; }
+    .boho-section .card-nome { color: #F5E6DC; }
+    .boho-section .card-tam { color: #C4A090; }
+    .boho-section .card-preco { color: #D4A878; }
+    .boho-section .card-parcelas { color: #C4A090; }
+    .boho-section .card-medidas { color: #9B7060; }
   </style>
 </head>
 <body>
