@@ -2,6 +2,14 @@
   publish = "."
   functions = "netlify/functions"
 
+[images]
+  remote_images = [
+    "https://prod-files-secure\\.s3\\.us-west-2\\.amazonaws\\.com/.*",
+    "https://s3\\.us-west-2\\.amazonaws\\.com/.*",
+    "https://file\\.notion\\.so/.*",
+    "https://notion\\.so/.*"
+  ]
+
 [build.environment]
   NODE_VERSION = "18"
 

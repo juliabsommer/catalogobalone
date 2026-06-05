@@ -135,8 +135,22 @@
       display: flex; align-items: center; justify-content: center;
       position: relative; overflow: hidden;
     }
-    .card-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .card-foto-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 44px; }
+    .card-foto::after {
+      content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(90deg, var(--lilas-pale) 25%, #f8eefe 50%, var(--lilas-pale) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      transition: opacity 0.3s;
+    }
+    .card-foto.carregada::after { opacity: 0; animation: none; }
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .card-foto img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity 0.4s ease; position: relative; z-index: 2; }
+    .card-foto img.carregada { opacity: 1; }
+    .card-foto-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 44px; position: relative; z-index: 2; background: var(--fundo-card); }
+    .card-foto:has(.card-foto-placeholder)::after { display: none; }
 
     .card-check {
       position: absolute; top: 8px; right: 8px;
@@ -411,6 +425,12 @@
       });
     }
 
+    function otimizarFoto(url) {
+      if (!url) return null;
+      // Netlify Image CDN: redimensiona para 600px e comprime para 75% — cacheia automaticamente
+      return `/.netlify/images?url=${encodeURIComponent(url)}&w=600&q=75&fit=cover`;
+    }
+
     function renderCard(p) {
       const tamCor = [p.tam ? `Tam. ${p.tam}` : '', p.cor].filter(Boolean).join(' · ');
       const pixVal = p.precoPix || p.preco;
@@ -423,7 +443,9 @@
              data-id="${p.id}" role="button" tabindex="${p.vendida?-1:0}"
              aria-label="${p.vendida?'Vendida: ':'Selecionar: '}${p.nome}">
           <div class="card-foto">
-            ${p.foto ? `<img src="${p.foto}" alt="${p.nome}" loading="lazy" />` : `<div class="card-foto-placeholder">${p.emoji||'👗'}</div>`}
+            ${p.foto
+              ? `<img src="${otimizarFoto(p.foto)}" alt="${p.nome}" loading="lazy" decoding="async" onload="this.classList.add('carregada');this.closest('.card-foto').classList.add('carregada')" onerror="this.closest('.card-foto').classList.add('carregada')" />`
+              : `<div class="card-foto-placeholder">${p.emoji||'👗'}</div>`}
             ${p.nova&&!p.vendida ? '<span class="card-badge">Desapego Novo</span>' : ''}
             ${p.vendida ? '<span class="card-vendida-tag">Vendida</span>' : ''}
             <div class="card-check">
