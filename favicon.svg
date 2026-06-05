@@ -1,7 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" fill="#3D2B50" rx="6"/>
-  <ellipse cx="16" cy="13" rx="7" ry="8.5" fill="#A87CC0"/>
-  <ellipse cx="12.5" cy="9.5" rx="2" ry="3" fill="#EDD5F7" opacity="0.45" transform="rotate(-18 12.5 9.5)"/>
-  <ellipse cx="16" cy="21.8" rx="1.8" ry="1.2" fill="#7A5C8A"/>
-  <path d="M16 23 C17 25.5 15.5 27 16 29" stroke="#C9A8DC" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <!-- Fundo roxo arredondado -->
+  <rect width="32" height="32" rx="7" fill="#3D2B50"/>
+  <!-- Gancho do cabide -->
+  <path d="M16 13 C16 13 16 7 19.5 7 C21.5 7 22 9 21 10.5 C20 12 18 12.5 16 13"
+        fill="none" stroke="#C9A8DC" stroke-width="1.6" stroke-linecap="round"/>
+  <!-- Ombro esquerdo -->
+  <path d="M16 13 Q9 16 5 22"
+        fill="none" stroke="#EDD5F7" stroke-width="2.2" stroke-linecap="round"/>
+  <!-- Ombro direito -->
+  <path d="M16 13 Q23 16 27 22"
+        fill="none" stroke="#EDD5F7" stroke-width="2.2" stroke-linecap="round"/>
+  <!-- Barra inferior -->
+  <line x1="5" y1="22" x2="27" y2="22"
+        stroke="#EDD5F7" stroke-width="2.2" stroke-linecap="round"/>
 </svg>
