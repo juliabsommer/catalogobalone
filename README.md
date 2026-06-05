@@ -1,123 +1,119 @@
-# Catálogo Brechó Balonê
+# catalogobalone
 
-**Case de produto · Desenvolvimento front-end + integração Notion CMS**
+Catálogo digital para um brechó feminino em Porto Alegre/RS. O Notion funciona como CMS — a proprietária gerencia o estoque pelo app mobile e as mudanças refletem no site sem nenhuma intervenção técnica.
 
-Site de catálogo digital para o Brechó Balonê — brechó feminino de Porto Alegre/RS fundado em 2010 pela Fê Bassi. O projeto nasceu da necessidade real da proprietária de divulgar peças pelo WhatsApp de forma organizada, sem depender de terceiros para atualizar o conteúdo.
-
-🔗 **[catalogobalone.netlify.app](https://catalogobalone.netlify.app)**
+**[catalogobalone.netlify.app](https://catalogobalone.netlify.app)**
 
 ---
 
-## O problema
+## Contexto
 
-A Fê gerenciava o estoque manualmente — fotos no celular, preços no papel, divulgação peça por peça no WhatsApp. Não havia como mostrar tudo disponível de uma vez, e cada venda virava uma troca demorada de mensagens.
+O negócio não tinha presença digital estruturada: estoque gerenciado no papel, divulgação peça a peça no WhatsApp. As restrições do projeto eram claras — custo zero de infraestrutura, zero dependência técnica no dia a dia, e funcionar bem em mobile tanto para quem gerencia quanto para quem compra.
 
-**Requisitos reais da cliente:**
-- Atualizar peças sozinha, sem tocar em código
-- Funcionar bem no celular (clientes e proprietária)
-- Finalizar pedido direto pelo WhatsApp
-- Custo zero de manutenção
-
----
-
-## A solução
-
-Catálogo estático com **Notion como CMS**. A proprietária gerencia tudo pelo app do Notion no celular — adiciona peça, coloca foto, marca como vendida — e o site atualiza automaticamente em segundos.
-
-```
-Notion (CMS)  →  Netlify Function  →  Site estático  →  WhatsApp
-     ↑                                                      ↓
-  Fê edita                                          Cliente finaliza pedido
-```
-
----
-
-## Stack
-
-| Camada | Tecnologia | Decisão |
-|---|---|---|
-| Frontend | HTML + CSS + JS vanilla | Sem framework — zero build step, deploy instantâneo |
-| CMS | Notion API | Familiaridade da cliente, app mobile excelente |
-| Backend | Netlify Functions (Node.js) | Serverless — esconde credenciais, sem servidor próprio |
-| Hospedagem | Netlify | Deploy automático via GitHub, HTTPS gratuito |
-| Versionamento | GitHub | Histórico + CI/CD integrado ao Netlify |
-
----
-
-## Funcionalidades
-
-- **Catálogo com filtros** por categoria — gerados dinamicamente a partir dos dados do Notion
-- **Três seções visuais** distintas: roupas, Espaço Boho (artigos esotéricos) e Mini Museu (peças retrô)
-- **Seleção múltipla** de peças com carrinho flutuante
-- **Mensagem automática para WhatsApp** com todas as peças selecionadas, tamanho, cor, medidas e preços (PIX e parcelado)
-- **Tag "Desapego Novo"** para peças recém-adicionadas
-- **Peças vendidas** somem do catálogo automaticamente ao marcar campo no Notion
-- **Preço PIX e preço cartão** separados por peça
-- **Código da peça** exibido no card e incluído na mensagem do pedido
-- **Preview rico** no WhatsApp/Instagram via Open Graph (og:image PNG 1200×630)
-- **Fallback para dados mock** caso a API do Notion esteja indisponível
+A escolha do Notion como CMS veio dessas restrições: a proprietária já usava a ferramenta, o app mobile é bom, e a API é simples o suficiente para expor via uma função serverless sem overhead desnecessário.
 
 ---
 
 ## Arquitetura
 
 ```
-catalogobalone.netlify.app
-├── index.html          # Frontend completo (HTML + CSS + JS inline)
-├── config.js           # Configurações do brechó (nome, WhatsApp)
-├── favicon.svg         # Ícone do site
-├── og-image.png        # Preview para redes sociais (1200×630)
-└── netlify/
-    └── functions/
-        └── pecas.js    # Serverless function → Notion API
+GitHub → Netlify CI/CD → site estático (index.html)
+                       → Netlify Function (/pecas)
+                              ↕
+                         Notion API
 ```
 
-**Fluxo de dados:**
-1. Cliente abre o site → JS chama `/.netlify/functions/pecas`
-2. Netlify Function autentica na Notion API com token em variável de ambiente (nunca exposto no cliente)
-3. Dados transformados e retornados como JSON
-4. JS renderiza os cards dinamicamente
+```
+.
+├── index.html              # toda a UI — HTML, CSS e JS em arquivo único
+├── config.js               # nome do brechó e número do WhatsApp
+├── og-image.png            # preview Open Graph para WhatsApp/Instagram (1200×630)
+├── favicon.svg
+├── netlify.toml            # config de build, headers HTTP e image CDN
+└── netlify/functions/
+    └── pecas.js            # serverless function: proxy autenticado para a Notion API
+```
+
+O frontend é um arquivo HTML único sem build step — sem bundler, sem framework. A decisão foi deliberada: o projeto não tem colaboradores, não vai escalar para múltiplas páginas e qualquer pessoa com acesso ao repositório consegue ler e modificar o código sem setup.
+
+---
+
+## Serverless function
+
+`pecas.js` é um proxy entre o frontend e a Notion API. Existe por um motivo específico: expor o `NOTION_TOKEN` diretamente no cliente seria um problema de segurança, mas o site não tem backend próprio.
+
+A função usa o módulo `https` nativo do Node em vez de `fetch`. O bundler padrão do Netlify Functions tem incompatibilidade com a API `fetch` no Node 18 — a função retornava 404 silencioso até ser reescrita sem dependências externas.
+
+```js
+// netlify/functions/pecas.js
+const https = require('https');
+
+exports.handler = async () => {
+  // autentica com NOTION_TOKEN da variável de ambiente
+  // transforma a resposta da Notion API no formato esperado pelo frontend
+  // retorna JSON com CORS aberto (leitura pública, sem escrita)
+};
+```
+
+As credenciais ficam nas variáveis de ambiente do Netlify — nunca no código, nunca no repositório.
+
+---
+
+## Otimização de imagens
+
+Fotos enviadas via Notion chegam do S3 da AWS sem compressão — câmeras de celular geram arquivos de 5–15 MB. O Netlify Image CDN resolve isso sem infraestrutura adicional:
+
+```js
+function otimizarFoto(url) {
+  return `/.netlify/images?url=${encodeURIComponent(url)}&w=600&q=75`;
+}
+```
+
+A transformação é cacheada na CDN depois da primeira requisição. O `netlify.toml` precisa declarar os domínios remotos permitidos — no caso, os buckets S3 da Notion.
 
 ---
 
 ## Segurança
 
-- Credenciais do Notion em **variáveis de ambiente** no Netlify — nunca no código
-- Cabeçalhos HTTP de segurança configurados no `netlify.toml`:
-  - `Content-Security-Policy` — bloqueia scripts de origens não autorizadas
-  - `X-Frame-Options: DENY` — impede clickjacking
-  - `X-Content-Type-Options: nosniff`
-  - `Referrer-Policy: strict-origin-when-cross-origin`
-  - `Permissions-Policy` — desativa câmera, microfone, geolocalização e pagamento
-- Site **somente leitura** — nenhuma escrita no Notion pelo frontend
+Headers configurados no `netlify.toml` para todas as rotas:
+
+```toml
+Content-Security-Policy    = "default-src 'self'; script-src 'self' 'unsafe-inline' ..."
+X-Frame-Options            = "DENY"
+X-Content-Type-Options     = "nosniff"
+Referrer-Policy            = "strict-origin-when-cross-origin"
+Permissions-Policy         = "camera=(), microphone=(), geolocation=(), payment=()"
+```
+
+O site é somente leitura — a Netlify Function só faz `POST /query` na Notion API, nunca escrita.
 
 ---
 
-## Desafios técnicos
+## Open Graph
 
-**`fetch` nativo incompatível com Netlify Functions no Node 18**
-A função serverless retornava 404. Causa: incompatibilidade entre o bundler padrão e a API `fetch`. Solução: reescrever usando o módulo `https` nativo do Node — zero dependências externas.
-
-**og:image em SVG não renderiza no WhatsApp**
-O preview do link aparecia em branco. Solução: gerar PNG 1200×630 com Python/Pillow substituindo o SVG.
-
-**og:image com caminho relativo não carregava em alguns clientes**
-WhatsApp exige URL absoluta no `og:image`. Corrigido apontando para `https://catalogobalone.netlify.app/og-image.png`.
+O WhatsApp não renderiza SVG em previews de link. O `og-image.png` foi gerado com Python/Pillow (1200×630) e a meta tag aponta para URL absoluta — WhatsApp ignora caminhos relativos no `og:image`.
 
 ---
 
-## Entregáveis além do site
+## Configuração
 
-- **Guia PDF** para a proprietária gerenciar o catálogo pelo Notion (sem linguagem técnica)
-- **Logo SVG** e favicon criados para o brechó
-- **Repositório** com histórico completo de decisões e iterações
+Variáveis de ambiente necessárias no Netlify:
+
+| Variável | Descrição |
+|---|---|
+| `NOTION_TOKEN` | Token da integração (secret_...) |
+| `NOTION_DATABASE` | ID do banco de dados do Notion |
+
+Personalização do brechó em `config.js`:
+
+```js
+window.BRECHO_CONFIG = {
+  nomeBrecho: "Brechó Balonê",
+  assinatura: "Fê Bassi",
+  whatsapp: "5551999580604",
+};
+```
 
 ---
 
-## Resultado
-
-A Fê consegue adicionar uma peça nova em menos de 2 minutos pelo celular. O catálogo substitui as trocas de mensagens individuais — clientes navegam, selecionam o que querem e enviam o pedido completo de uma vez.
-
----
-
-*Desenvolvido por [Júlia Sommer](https://github.com/juliabsommer)*
+*[Júlia Sommer](https://github.com/juliabsommer)*
